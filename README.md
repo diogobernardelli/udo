@@ -1,8 +1,7 @@
-# uDo
+<img src="https://i.ibb.co/2PQ4xCC/logo.png" style="height: 80px;" />
+<br />
 
-**uDo** - Create tasks for **you** to **do** :)
-
-IMAGEM VAI AQUI
+*Create tasks for **You** to **do*** 
 
 ## About the project
 
@@ -21,17 +20,17 @@ This is a so called **To Do List**, created using Ruby on Rails (backend) + Vue 
 To setup the API project, run the following commands:
 ```bash
 $ cd back/
+$ gem install bundle
 $ bundle
 $ rails db:create db:migrate
 $ rails s
 ```
+It should be running on `http://localhost:3000`
 
-It will be also required to start redis server:
+Also, it will be required to start redis server:
 ```bash
 $ redis-server
 ```
-
-It should be running on `http://localhost:3000`
 
 ### FRONT
 
@@ -46,3 +45,24 @@ $ npm run serve
 ```
 
 It should be running on `http://localhost:8080`
+
+
+## Major Features
+
+| Feature |  |
+| --- | --- |
+| Sign in | ✓ |
+| Sign up | ✓ |
+| Create Activity | ✓ |
+| Update Activity | ✓ |
+| Reorder Activity | ✓ |
+| Delete Activity | ✓ |
+| Visual Callbacks (success & errors) | ✓ |
+
+
+
+## About the design
+
+I came with the **UDo** (acronym to You Do) name while was thinking about a good to-do list name. Then, after searching for inspiration to create a logo, I [found this](https://www.behance.net/gallery/102541371/UDo) and I was never able to thinking in something <span style="text-decoration: line-through;">better</span> else than this incredible design.
+
+[Rafa Dantas](https://www.behance.net/rafadantas) is the real deal!

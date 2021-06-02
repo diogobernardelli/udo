@@ -1,0 +1,31 @@
+<template>
+  <div class="c-container">
+    <slot />
+  </div>
+</template>
+
+<script>
+  export default {
+    props: {
+      gutter: {
+        type: Boolean,
+        default: true
+      }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+  .c-container {
+    max-width: 600px;
+    margin: 50px auto;
+    box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    background-color: white;
+    overflow: hidden;
+
+    &.-full-width {
+      max-width: 100%;
+    }
+  }
+</style>

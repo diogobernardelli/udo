@@ -22,6 +22,14 @@ To setup the API project, run the following commands:
 $ cd back/
 $ gem install bundle
 $ bundle
+$ touch config/database.yml
+```
+
+This last command will create a new file. Copy the content from the `database-sample.yml` file to the `database.yml` and then update with your `postgresql` username and password credentials.
+
+After that, you are able to create the database and start the server:
+
+```bash
 $ rails db:create db:migrate
 $ rails s
 ```

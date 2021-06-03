@@ -65,7 +65,7 @@
 		},
 		methods: {
 			closeAlert() {
-				this.$emit('close')
+				this.$store.commit('closeAlert')
 			}
 		}
   }

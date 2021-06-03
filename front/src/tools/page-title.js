@@ -11,7 +11,7 @@ export default {
     const pageTitle = getPageTitle(this)
 
     if (pageTitle) {
-      document.title = `uDo | ${pageTitle}`
+      document.title = `UDo | ${pageTitle}`
     }
   }
 }

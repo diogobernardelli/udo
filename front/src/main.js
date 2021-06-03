@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './app.vue'
 import router from './router'
+import store from './store'
 import VueAxios from 'vue-axios'
 import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 import pageTitle from '@/tools/page-title'
@@ -11,7 +12,8 @@ import {
   faCheck,
   faTimes,
   faExclamationTriangle,
-  faArrowCircleDown
+  faArrowCircleDown,
+  faCircleNotch
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -21,7 +23,8 @@ library.add(
   faCheck,
   faTimes,
   faExclamationTriangle,
-  faArrowCircleDown
+  faArrowCircleDown,
+  faCircleNotch
 )
 
 Vue.mixin(pageTitle)
@@ -37,6 +40,7 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   securedAxiosInstance,
   plainAxiosInstance,
   render: h => h(App)

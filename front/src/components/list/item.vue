@@ -5,16 +5,16 @@
 				<input
 					type="checkbox"
 					class="c-hidden-box"
-					v-bind:name="name"
-					v-bind:id="name"
+					v-bind:title="title"
+					v-bind:id="title"
 					v-on:change="$emit('change', id)"
 					v-model="isChecked"
 				/>
 
-				<label :for="name" class="check-label">
+				<label :for="title" class="check-label">
 					<span class="check-label-box"></span>
 					<span class="check-label-text">
-						{{name}}
+						{{title}}
 					</span>
 				</label>
 			</div>
@@ -44,7 +44,7 @@
 export default {
 	name: "Item",
 	props: {
-		name: String,
+		title: String,
 		order: Number,
 		id: Number,
 		checked: {
@@ -60,6 +60,7 @@ export default {
 	watch: {
 		checked() {
 			this.isChecked = this.checked
+			if (this.isChecked) this.$store.commit('displayAlert', {message: 'Activity successfully completed', status: 'success'}); 
 		}
 	},
 	methods: {

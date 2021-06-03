@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
 	belongs_to :user
 	
-	validates :title, presence: true
+	validates :title, :order, presence: true
 end

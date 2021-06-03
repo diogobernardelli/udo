@@ -11,18 +11,20 @@
 	>
 		<input
 			type="text"
-			ref="textInput"
 			class="-text-input"
 			placeholder="What will UDo?"
+			maxlength="50"
+			v-model="activity"
 			v-on:click="handleFocus(true)"
 		>
 
-		<font-awesome-icon
+		<button
+			type="submit"
 			class="-submit-input"
-			icon="arrow-circle-down"
 			v-on:click="addNewItem"
-		/>
-
+		>
+			<font-awesome-icon icon="arrow-circle-down" />
+		</button>
 	</form>
 </template>
 
@@ -37,19 +39,21 @@
 		data() {
 			return {
 				isWriteable: false,
+				activity: ''
 			}
 		},
 		methods: {
 			addNewItem() {
-				const value = this.$refs.textInput.value
+				const value = this.activity
 				if (value) {
-					this.$emit('addItem', this.$refs.textInput.value)
-					this.$refs.textInput.value = ''
+					this.$emit('addItem', this.activity)
+					this.activity = ''
 				} else {
-					this.$emit('errorMessage', 'Activity cannot be empty', 'error')
+					this.$store.commit('displayAlert', {message: 'Activity cannot be empty', status: 'error'});
 				}
 			},
 			handleFocus(status) {
+				this.activity = ''
 				this.isWriteable = status
 			},
 			away: function() {
@@ -69,15 +73,22 @@
 		border-radius: 50px;
 		width: 170px;
 		transition: all 300ms ease-in-out;
+		border: 3px solid #001a4a;
+
+		&:not(.-is-writeable):hover {
+			padding: 0 20px;
+			width: 210px;
+		}
 
 		.-text-input {
 			display: inline-block;
 			border: 0;
-			color: white;
 			line-height: 60px;
 			background: none;
 			width: 170px;
 			padding: 0 30px;
+			color: white;
+			font-weight: 600;
 			cursor: pointer;
 			transition: all 300ms ease-in-out;
 
@@ -88,13 +99,14 @@
 		}
 
 		.-submit-input {
-			position: fixed;
+			position: absolute;
 			opacity: 0;
 			z-index: -1;
-			margin-top: 21px;
-			margin-left: -10px;
+			margin-top: 20px;
+			margin-left: -20px;
 			border: 0;
 			color: #f56356;
+			background: none;
 			cursor: pointer;
 			width: 18px;
 			height: 18px;
@@ -102,6 +114,7 @@
 
 		&.-is-writeable {
 			width: 400px;
+			border-color: #f56356;
 			border-radius: 10px;
 			
 			.-text-input {

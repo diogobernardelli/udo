@@ -1,80 +1,56 @@
 <template>
-  <div class="max-w-sm m-auto my-8">
-    <div class="border p-10 border-grey-light shadow rounded">
-      <h3 class="text-2xl mb-6 text-grey-darkest">Sign Up</h3>
-      <form @submit.prevent="signup">
-        <div class="text-red" v-if="error">{{ error }}</div>
+  <div>
+    <vAlertMessage
+      :text="getAlertMessage.message"
+      :type="getAlertMessage.status"
+    />
 
-        <div class="mb-6">
-          <label for="email" class="label">E-mail Address</label>
-          <input type="email" v-model="email" class="input" id="email" placeholder="andy@web-crunch.com">
-        </div>
+    <vLogo />
 
-        <div class="mb-6">
-          <label for="password" class="label">Password</label>
-          <input type="password" v-model="password" class="input" id="password" placeholder="Password">
-        </div>
+    <vForm />
 
-        <div class="mb-6">
-          <label for="password_confirmation" class="label">Password Confirmation</label>
-          <input type="password" v-model="password_confirmation" class="input" id="password_confirmation" placeholder="Password Confirmation">
-        </div>
-        <button type="submit" class="font-sans font-bold px-4 rounded cursor-pointer no-underline bg-green hover:bg-green-dark block w-full py-4 text-white items-center justify-center">Sign Up</button>
-
-        <div class="my-4"><router-link to="/" class="link-grey">Sign In</router-link></div>
-      </form>
+    <div class="sign-up">
+      Already have a UDo account?<br />
+			<router-link to="/">SIGN IN</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import vLogo from '@/components/logo.vue'
+import vForm from '@/components/signup/form.vue'
+import vAlertMessage from '@/components/list/alert-message.vue'
+
 export default {
   name: 'Signup',
   pageTitle() {
     return 'Sign up'
   },
-  data () {
-    return {
-      email: '',
-      password: '',
-      password_confirmation: '',
-      error: ''
-    }
+  components: {
+    vLogo,
+    vForm,
+    vAlertMessage
   },
-  created () {
-    this.checkedSignedIn()
-  },
-  updated () {
-    this.checkedSignedIn()
-  },
-  methods: {
-    signup () {
-      this.$http.plain.post('/signup', { email: this.email, password: this.password, password_confirmation: this.password_confirmation })
-        .then(response => this.signupSuccessful(response))
-        .catch(error => this.signupFailed(error))
-    },
-    signupSuccessful (response) {
-      if (!response.data.csrf) {
-        this.signupFailed(response)
-        return
-      }
-
-      localStorage.email = response.data.email
-      localStorage.csrf = response.data.csrf
-      localStorage.signedIn = true
-      this.error = ''
-      this.$router.replace('/list')
-    },
-    signupFailed (error) {
-      this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
-      delete localStorage.csrf
-      delete localStorage.signedIn
-    },
-    checkedSignedIn () {
-      if (localStorage.signedIn) {
-        this.$router.replace('/list')
+  computed: {
+    getAlertMessage() {
+      return {
+        message: this.$store.state.alertText,
+        status: this.$store.state.alertType
       }
     }
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .sign-up {
+    text-align: center;
+    line-height: 2;
+    margin: 80px 0 30px;
+    font-size: 13px;
+
+    a {
+      font-weight: bold;
+    }
+  }
+</style>

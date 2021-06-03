@@ -1,8 +1,8 @@
-class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
-  
-	include JWTSessions::RailsAuthorization
-  rescue_from JWTSessions::Errors::Unauthorized, with: :not_authorized
+class ApplicationController < ActionController::API
+  include JWTSessions::RailsAuthorization
+  include APICommonResponses
+
+  rescue_from JWTSessions::Errors::Unauthorized, with: :render_unauthorized_error
 
   private
 

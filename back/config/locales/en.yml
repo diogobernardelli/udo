@@ -30,4 +30,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  api_success:
+    default: Success!
+    items_created: Activity Successfully Created
+    items_updated: Activity Successfully Updated
+    item_deleted: Activity Successfully Removed
+    items_reordered: Your tasks have been reordered
+  api_errors:
+    already_exists: User already exists
+    render_not_found: "%{class} Not found"
+    render_unauthorized: Invalid username or password
+    empty_reorder_list: Reorder list cannot be empty
+    render_unprocessable_entity: Unprocessable entity

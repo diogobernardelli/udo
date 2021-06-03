@@ -6,9 +6,8 @@
         class="logo"
       />
       <div class="account">
-        <span>Hi, {{ email }}</span><br />
+        <span>Hi, {{ username }}</span><br />
         <a
-          v-if="signedIn()"
           class="logout"
           href="javascript:;"
           icon="sign-out-alt"
@@ -25,19 +24,16 @@
 export default {
   name: 'Header',
   created () {
-    this.signedIn()
+    this.checkedSignedIn()
 	},
 	data() {
 		return {
-			email: localStorage.email
+			username: localStorage.username
 		}
-	},
+  },
   methods: {
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
-    },
-    signedIn () {
-      return localStorage.signedIn
     },
     signOut () {
       this.$http.secured.delete('/signin')
@@ -46,7 +42,12 @@ export default {
           delete localStorage.signedIn
           this.$router.replace('/')
         })
-        .catch(error => this.setError(error, 'Cannot sign out'))
+        .catch(() => this.$store.commit('displayAlert', {message: 'Cannot sign out', status: 'error'}))
+    },
+    checkedSignedIn () {
+      if (!localStorage.signedIn) {
+        this.$router.replace('/')
+      }
     }
   }
 }

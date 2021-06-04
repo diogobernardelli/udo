@@ -66,6 +66,7 @@ It should be running on `http://localhost:8080`
 | Reorder Activity | ✓ |
 | Delete Activity | ✓ |
 | Visual Callbacks (success & errors) | ✓ |
+| Turn on/off Notifications | ✓ |
 
 
 

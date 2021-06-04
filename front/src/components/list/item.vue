@@ -1,7 +1,7 @@
 <template>
   <li class="c-item">
 		<form @submit.prevent>
-			<div class="l-content">
+			<div class="l-content" v-on-clickaway="away">
 				<div class="l-item-label">
 					<input
 						type="checkbox"
@@ -26,7 +26,6 @@
 							ref="itemInput"
 							placeholder="What will UDo?"
 							maxlength="50"
-							v-on-clickaway="away"
 							v-model="writableTitle"
 						>
 					</label>
@@ -53,13 +52,19 @@
 
 					<div v-else>
 						<button
-							v-if="!isChecked"
 							type="submit"
 							class="o-icon-button"
 							v-on:click="updateItem"
 						>
 							<font-awesome-icon icon="save" />
 						</button>
+
+							<button
+								class="o-icon-button"
+								v-on:click="isWritable=false"
+							>
+								<font-awesome-icon icon="times" />
+							</button>
 					</div>
 				</div>
 			</div>

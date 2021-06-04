@@ -84,7 +84,7 @@
 		font-size: $font-size-default;
 		font-weight: $weight-bold;
 		color: white;
-		box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.2);
+		box-shadow: 0px 4px 5px 2px $shadow-box-color;
 		transition: all 500ms cubic-bezier(1,-0.62, 0, 1.34);
 		z-index: 999;
 
@@ -98,18 +98,18 @@
 		}
 
 		&.-success {
-			background-color: #00bd9d;
+			background-color: $color-success;
 			
 			&::after {
-				background-color: #008a72;
+				background-color: $color-success-secondary;
 			}
 		}
 
 		&.-error {
-			background-color: #f18f3e;
+			background-color: $color-error;
 
 			&::after {
-				background-color: #c4722d;
+				background-color: $color-error-secondary;
 			}
 		}
 		

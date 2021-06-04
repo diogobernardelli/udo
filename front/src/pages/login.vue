@@ -9,7 +9,7 @@
 
     <vForm />
 
-    <div class="sign-up">
+    <div class="c-sign-in-up">
       Don't have a UDo account?<br />
       <router-link to="/signup">SIGN UP</router-link>
     </div>
@@ -43,14 +43,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .sign-up {
-    text-align: center;
-    line-height: 2;
-    margin: 80px 0 30px;
-    font-size: $font-size-default;
 
-    a {
-      font-weight: $weight-bold;
-    }
-  }
 </style>

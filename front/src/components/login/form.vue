@@ -31,7 +31,7 @@
         </label>
       </div>
       
-      <button class="o-button" type="submit">
+      <button class="l-button" type="submit">
         <font-awesome-icon v-if="isLoading" class="rotate" icon="circle-notch" />
         <span v-else>Sign In</span>
       </button>
@@ -80,7 +80,6 @@
         this.isLoading = false
         const errorMessage = (error.response && error.response.data && error.response.data.error) || error
         displayErrorAlert(errorMessage)
-        // this.$store.commit('displayAlert', {message: errorMessage, status: 'error'});
         delete localStorage.csrf
         delete localStorage.signedIn
         delete localStorage.alerts
@@ -100,7 +99,7 @@
     width: 60%;
     margin: 30px auto;
 
-    .o-button {
+    .l-button {
       width: 100%;
     }
   }

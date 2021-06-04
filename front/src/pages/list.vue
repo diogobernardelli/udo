@@ -12,7 +12,11 @@
       :is-adding-item="isAddingItem"
     />
 
-    <font-awesome-icon v-if="isFetchingItems" class="rotate" icon="circle-notch" />
+    <font-awesome-icon
+      v-if="isFetchingItems"
+      class="rotate"
+      icon="circle-notch"
+    />
 
     <div v-else>
       <div>
@@ -213,7 +217,7 @@ export default {
     width: 40px;
     height: 40px;
     margin: 40px auto;
-    color: #001a4a;
+    color: $color-secondary;
   }
 
   @media only screen and (max-width: 600px) {

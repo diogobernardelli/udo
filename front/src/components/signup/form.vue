@@ -46,7 +46,7 @@
         </label>
       </div>
       
-      <button class="o-button" type="submit">
+      <button class="l-button" type="submit">
         <font-awesome-icon v-if="isLoading" class="rotate" icon="circle-notch" />
         <span v-else>Sign Up</span>
       </button>
@@ -114,7 +114,7 @@
     width: 60%;
     margin: 30px auto;
 
-    .o-button {
+    .l-button {
       width: 100%;
     }
   }

@@ -23,9 +23,11 @@
     border-radius: 5px;
     background-color: white;
     overflow: hidden;
+  }
 
-    &.-full-width {
-      max-width: 100%;
+  @media only screen and (max-width: 600px) {
+    .c-container {
+      max-width: 96%;
     }
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <p
+  <div
 		class="c-empty-list-helper" 
 	>
     <img
@@ -7,8 +7,10 @@
       class="icon"
     />
     <br />
-		click on the <strong>"What will UDo?"</strong> button to add a new activity
-	</p>
+		<p>
+      click on the <strong>"What will UDo?"</strong> button to add a new activity
+    </p>
+	</div>
 </template>
 
 <script>
@@ -23,11 +25,24 @@
 		margin: 30px auto 50px;
 		font-size: 14px;
     font-style: italic;
+
+    p {
+      margin: 0;
+    }
     
     .icon {
       display: block;
       width: 50%;
       margin: 70px auto 20px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .c-empty-list-helper {
+      p {
+        max-width: 60%;
+        margin: 0 auto;
+      }
     }
   }
 </style>

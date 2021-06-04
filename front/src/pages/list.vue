@@ -114,7 +114,7 @@ export default {
     load() {
       this.isFetchingItems = true
 
-      this.$http.plain.get(ITEMS_ENDPOINT)
+      this.$http.secured.get(ITEMS_ENDPOINT)
         .then(response => {
           this.list = response.data.items
         })
@@ -214,5 +214,11 @@ export default {
     height: 40px;
     margin: 40px auto;
     color: #001a4a;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .c-list-group {
+			margin-bottom: 0;
+    }
   }
 </style>

@@ -153,7 +153,7 @@ export default {
 		position: relative;
 		cursor: move;
 		list-style: none;
-		padding: 30px 30px;
+		padding: 30px;
 		background-color: #fff;
 		margin-bottom: 1px;
 		overflow: hidden;
@@ -228,4 +228,11 @@ export default {
 			font-weight: bold;
 		}
 	}
+
+	@media only screen and (max-width: 600px) {
+    .c-item {
+			padding: 15px 10px;
+			font-size: 13px;
+    }
+  }
 </style>

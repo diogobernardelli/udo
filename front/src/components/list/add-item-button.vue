@@ -166,4 +166,35 @@
 			z-index: 100;
 		}
 	}
+
+	@media only screen and (max-width: 600px) {
+    .c-add-activity {
+			margin: -20px auto 0;
+			width: 150px;
+
+			.-text-input {
+				line-height: 40px;
+				font-size: 13px;
+				width: 150px;
+			}
+
+			.-submit-input,
+			.-adding-item-loader {
+				margin-top: 11px;
+				margin-left: -10px;
+			}
+
+			&.-is-writeable {
+				width: 90%;
+
+				.-text-input {
+					width: 90%;
+				}
+
+				.-adding-item-loader {
+					margin-left: -5px;
+				}
+			}
+		}
+  }
 </style>

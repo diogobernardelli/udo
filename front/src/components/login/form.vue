@@ -6,13 +6,13 @@
           type="text"
           class="-form-field"
           v-model="username"
-          placeholder="Username"
+          :placeholder="$t('forms.username')"
           name="username"
           id='username'
           required
         />
         <label for="username" class="form-label">
-          Username
+          {{ $t('forms.username') }}
         </label>
       </div>
 
@@ -21,19 +21,19 @@
           type="password"
           class="-form-field"
           v-model="password"
-          placeholder="Password"
+          :placeholder="$t('forms.password')"
           name="password"
           id='password'
           required
         />
         <label for="password" class="form-label">
-          Password
+          {{ $t('forms.password') }}
         </label>
       </div>
       
       <button class="l-button" type="submit">
         <font-awesome-icon v-if="isLoading" class="rotate" icon="circle-notch" />
-        <span v-else>Sign In</span>
+        <span v-else>{{ $t('forms.sign_in') }}</span>
       </button>
     </form>
   </div>

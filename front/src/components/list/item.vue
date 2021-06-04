@@ -24,7 +24,7 @@
 							type="text"
 							class="-text-input"
 							ref="itemInput"
-							placeholder="What will UDo?"
+							:placeholder="$t('list.add_item_button')"
 							maxlength="50"
 							v-model="writableTitle"
 						>
@@ -103,7 +103,9 @@ export default {
 	watch: {
 		checked() {
 			this.isChecked = this.checked
-			if (this.isChecked) this.isWritable = false
+			if (this.isChecked) {
+				this.disableWriteMode()
+			}
 		},
 		isWritable: {
 			handler() {
@@ -125,7 +127,7 @@ export default {
 		},
 		isDragging: {
 			handler() {
-				this.isWritable = false
+				this.disableWriteMode()
 			},
 			immediate: true
 		}
@@ -139,11 +141,15 @@ export default {
     },
 		updateItem() {
 			this.$emit('edit', this.id, this.writableTitle)
-			this.isWritable = false
+			this.disableWriteMode()
 		},
 		away: function() {
-			this.isWritable = false
+			this.disableWriteMode()
 		},
+		disableWriteMode() {
+			this.isWritable = false
+			this.writableTitle = this.title
+		}
 	}
 };
 </script>

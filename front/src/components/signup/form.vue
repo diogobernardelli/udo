@@ -4,51 +4,51 @@
       <div class="c-form-group">
         <input
           type="text"
-          class="form-field"
+          class="-form-field"
           v-model="username"
-          placeholder="Username"
+          :placeholder="$t('forms.username')"
           name="username"
           id='username'
           required
         />
         <label for="username" class="form-label">
-          Username
+          {{ $t('forms.username') }}
         </label>
       </div>
 
 			<div class="c-form-group">
         <input
           type="password"
-          class="form-field"
+          class="-form-field"
           v-model="password"
-          placeholder="Password"
+          :placeholder="$t('forms.password')"
           name="password"
           id='password'
           required
         />
         <label for="password" class="form-label">
-          Password
+          {{ $t('forms.password') }}
         </label>
       </div>
 
 			<div class="c-form-group">
         <input
           type="password"
-          class="form-field"
+          class="-form-field"
           v-model="password_confirmation"
-          placeholder="Password Confirmation"
+          :placeholder="$t('forms.password_confirmation')"
           name="password_confirmation"
           id='password_confirmation'
           required
         />
         <label for="password_confirmation" class="form-label">
-          Password Confirmation
+          {{ $t('forms.password_confirmation') }}
         </label>
       </div>
       
       <button class="l-button" type="submit">
         <font-awesome-icon v-if="isLoading" class="rotate" icon="circle-notch" />
-        <span v-else>Sign Up</span>
+        <span v-else>{{ $t('forms.sign_up') }}</span>
       </button>
     </form>
   </div>
@@ -93,7 +93,7 @@
 			},
 			signupFailed (error) {
 				this.isLoading = false
-				const errorMessage = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
+				const errorMessage = (error.response && error.response.data && error.response.data.error) || this.$t('errors.default')
 				displayErrorAlert(errorMessage)
 				delete localStorage.csrf
         delete localStorage.signedIn

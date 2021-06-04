@@ -16,8 +16,6 @@
 </script>
 
 <style scoped lang="scss">
-  // @import '@/assets/style/_colors.scss';
-
   .c-container {
     max-width: 600px;
     margin: 50px auto;

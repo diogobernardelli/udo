@@ -7,9 +7,7 @@
       class="icon"
     />
     <br />
-		<p>
-      click on the <strong>"What will UDo?"</strong> button to add a new activity
-    </p>
+    <p v-html="$t('helpers.create_first_item')"></p>
 	</div>
 </template>
 

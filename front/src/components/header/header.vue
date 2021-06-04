@@ -6,15 +6,15 @@
         class="logo"
       />
       <div class="account">
-        <span>Hi, <strong>{{ username }}</strong>.</span>
+        <span v-html="$t('header.greetings', { user: username })"></span>
         <a
           class="logout"
           @click.prevent="signOut"
         >
-          Log Out
+          {{ $t('header.sign_out') }}
         </a>
         <br />
-        Notifications <vToogle
+        {{ $t('header.notifications') }} <vToogle
           @change="toogleNotificationState"
           v-bind:checked="alertState"
         />
@@ -59,7 +59,7 @@ export default {
           delete localStorage.alerts
           this.$router.replace('/')
         })
-        .catch(() => displayErrorAlert('Cannot sign out'))
+        .catch(() => displayErrorAlert(this.$t('errors.cannot_sign_out')))
     },
     toogleNotificationState() {
       this.$http.secured.post(`${SETTINGS_ENDPOINT}/toogle_alert`)

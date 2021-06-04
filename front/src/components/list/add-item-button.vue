@@ -9,10 +9,11 @@
 		]"
 		v-on-clickaway="away"
 	>
+	
 		<input
 			type="text"
 			class="-text-input"
-			placeholder="What will UDo?"
+			:placeholder="$t('list.add_item_button')"
 			maxlength="50"
 			v-model="activity"
 			v-on:click="handleFocus(true)"
@@ -59,7 +60,7 @@
 					this.$emit('addItem', this.activity)
 					this.activity = ''
 				} else {
-					displayErrorAlert('Activity cannot be empty')
+					displayErrorAlert(this.$t('errors.blank_item'))
 				}
 			},
 			handleFocus(status) {

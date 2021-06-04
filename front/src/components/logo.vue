@@ -1,9 +1,7 @@
 <template>
   <div class="logo">
 		<img src="@/assets/images/logo.png"/>
-		<p>
-			Create tasks for <strong>You</strong> to <strong>Do</strong>
-		</p>
+		<p v-html="$t('helpers.welcome_subtitle')"></p>
 	</div>
 </template>
 

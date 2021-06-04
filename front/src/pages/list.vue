@@ -63,7 +63,7 @@ const ITEMS_ENDPOINT = '/api/v1/items'
 export default {
   name: "List",
   pageTitle() {
-    return 'Create tasks for You to Do'
+    return this.$t('helpers.default_title')
   },
   components: {
     vHeader,

@@ -10,8 +10,8 @@
     <vForm />
 
     <div class="c-sign-in-up">
-      Don't have a UDo account?<br />
-      <router-link to="/signup">SIGN UP</router-link>
+      {{ $t('forms.action_sign_up') }}<br />
+      <router-link class="uppercase" to="/signup">{{ $t('forms.sign_up') }}</router-link>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ import vAlertMessage from '@/components/alert-message.vue'
 export default {
   name: 'Login',
   pageTitle() {
-    return 'Sign in'
+    return this.$t('forms.sign_in')
   },
   components: {
     vLogo,

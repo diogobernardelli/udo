@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="signup">
-      <div class="form-group">
+      <div class="c-form-group">
         <input
           type="text"
           class="form-field"
@@ -16,7 +16,7 @@
         </label>
       </div>
 
-			<div class="form-group">
+			<div class="c-form-group">
         <input
           type="password"
           class="form-field"
@@ -31,7 +31,7 @@
         </label>
       </div>
 
-			<div class="form-group">
+			<div class="c-form-group">
         <input
           type="password"
           class="form-field"

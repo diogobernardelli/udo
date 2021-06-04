@@ -1,5 +1,5 @@
 <template>
-  <label class="switch">
+  <label class="c-switch">
 		<input
 			type="checkbox"
 			v-on:change="$emit('change')"
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-	.switch {
+	.c-switch {
 		top: 1px;
 		margin-left: 4px;
 	}

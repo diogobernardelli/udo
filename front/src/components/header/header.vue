@@ -84,9 +84,9 @@ export default {
 <style scoped lang="scss">
 	.c-header {
     padding: 30px;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(0,0,0,.06);
-    box-shadow: 0px 5px 25px 3px rgba(0,0,0,0.10);
+    font-size: $font-size-big;
+    border-bottom: 1px solid $border-color;
+    box-shadow: 0px 5px 25px 3px $shadow-box-color;
 
     .logo {
       height: 40px;

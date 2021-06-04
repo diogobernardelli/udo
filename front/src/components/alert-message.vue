@@ -81,8 +81,8 @@
 		width: 300px;
 		padding: 20px 15px;
 		border-radius: 2px;
-		font-size: 13px;
-		font-weight: bold;
+		font-size: $font-size-default;
+		font-weight: $weight-bold;
 		color: white;
 		box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.2);
 		transition: all 500ms cubic-bezier(1,-0.62, 0, 1.34);

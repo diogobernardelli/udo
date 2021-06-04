@@ -47,10 +47,10 @@ export default {
     text-align: center;
     line-height: 2;
     margin: 80px 0 30px;
-    font-size: 13px;
+    font-size: $font-size-default;
 
     a {
-      font-weight: bold;
+      font-weight: $weight-bold;
     }
   }
 </style>

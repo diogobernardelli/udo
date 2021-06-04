@@ -25,7 +25,7 @@ export default {
 		}
 
 		p {
-			font-size: 16px;
+			font-size: $font-size-title;
 			margin-top: 10px;
 		}
 	}

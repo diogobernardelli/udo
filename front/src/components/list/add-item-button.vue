@@ -79,11 +79,11 @@
 		display: block;
 		margin: -30px auto 0;
 		width: fit-content;
-		background-color: #001a4a;
+		background-color: $color-secondary;
 		border-radius: 50px;
 		width: 170px;
 		transition: all 300ms ease-in-out;
-		border: 3px solid #001a4a;
+		border: 3px solid $color-secondary;
 
 		&:not(.-is-writeable):hover {
 			padding: 0 20px;
@@ -97,13 +97,13 @@
 			background: none;
 			width: 170px;
 			padding: 0 30px;
-			color: white;
-			font-weight: 600;
+			color: $color-white;
+			font-weight: $weight-bold;
 			cursor: pointer;
 			transition: all 300ms ease-in-out;
 
 			&::placeholder {
-				color: white;
+				color: $color-white;
 				transition: all 300ms ease-in-out;
 			}
 		}
@@ -116,7 +116,7 @@
 			margin-top: 20px;
 			margin-left: -20px;
 			border: 0;
-			color: #f56356;
+			color: $color-accent;
 			background: none;
 			cursor: pointer;
 			width: 18px;
@@ -125,7 +125,7 @@
 
 		&.-is-writeable {
 			width: 400px;
-			border-color: #f56356;
+			border-color: $color-accent;
 			border-radius: 10px;
 			
 			.-text-input {
@@ -135,7 +135,7 @@
 				cursor: inherit;
 
 				&::placeholder {
-					color: rgba(255,255,255,.4);
+					color: $color-placeholder;
 				}
 			}
 
@@ -174,7 +174,7 @@
 
 			.-text-input {
 				line-height: 40px;
-				font-size: 13px;
+				font-size: $font-size-default;
 				width: 150px;
 			}
 

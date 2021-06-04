@@ -1,8 +1,8 @@
 <template>
   <li class="c-item">
 		<form @submit.prevent>
-			<div class="l-content" v-on-clickaway="away">
-				<div class="l-item-label">
+			<div class="-content" v-on-clickaway="away">
+				<div class="-item-label">
 					<input
 						type="checkbox"
 						class="c-hidden-box"
@@ -31,7 +31,7 @@
 					</label>
 				</div>
 
-				<div class="l-action-buttons">
+				<div class="-action-buttons">
 					<div v-if="!isWritable">
 						<button
 							v-if="!isChecked"
@@ -154,22 +154,22 @@ export default {
 		cursor: move;
 		list-style: none;
 		padding: 30px;
-		background-color: #fff;
+		background-color: $color-white;
 		margin-bottom: 1px;
 		overflow: hidden;
-		border-bottom: 1px solid rgba(0,0,0,.06);
+		border-bottom: 1px solid $border-color;
 
 		&.ghost {
 			opacity: 1;
-			background: #f56356;
-			color: white;
+			background: $color-accent;
+			color: $color-white;
 
 			.c-hidden-box:checked + .check-label {
 				.check-label-text {
 					&:after {
-						background-color: #fff;
+						background-color: $color-white;
 					}
-					color: white;
+					color: $color-white;
 				}
 			}
 		}
@@ -178,41 +178,29 @@ export default {
 			border-bottom: 0;
 		}
 
-		.l-content {
+		.-content {
 			position: relative;
 			z-index: 1;
 		}
 
-		&::before {
-			content: '';
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			top: 0;
-			left: -100%;
-			background: rgba(255,255,255,.2);
-			border-radius: 50px;
-			z-index: 0;
-		}
-
 		.is-completed {
 			text-decoration: line-through;
-			color: #f56356;
+			color: $color-accent;
 		}
 
-		.l-item-label {
+		.-item-label {
 			display: inline-block;
 			width: calc(100% - 60px)
 		}
 
-		.l-action-buttons {
+		.-action-buttons {
 			float: right;
 			width: 60px;
 			opacity: 1;
 			margin-bottom: -100%;
 
 			.o-icon-button {
-				color: #f56356;
+				color: $color-accent;
 			}
 		}
 
@@ -225,14 +213,14 @@ export default {
 		.-text-input {
 			border: 0;
 			padding: 0;
-			font-weight: bold;
+			font-weight: $weight-bold;
 		}
 	}
 
 	@media only screen and (max-width: 600px) {
     .c-item {
 			padding: 15px 10px;
-			font-size: 13px;
+			font-size: $font-size-default;
     }
   }
 </style>

@@ -23,7 +23,7 @@
 		display: block;
 		text-align: center;
 		margin: 30px auto 50px;
-		font-size: 14px;
+		font-size: $font-size-big;
     font-style: italic;
 
     p {

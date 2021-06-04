@@ -1,10 +1,10 @@
 <template>
   <div>
     <form @submit.prevent="signin">
-      <div class="form-group">
+      <div class="c-form-group">
         <input
           type="text"
-          class="form-field"
+          class="-form-field"
           v-model="username"
           placeholder="Username"
           name="username"
@@ -16,10 +16,10 @@
         </label>
       </div>
 
-      <div class="form-group">
+      <div class="c-form-group">
         <input
           type="password"
-          class="form-field"
+          class="-form-field"
           v-model="password"
           placeholder="Password"
           name="password"

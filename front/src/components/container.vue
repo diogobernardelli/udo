@@ -16,12 +16,14 @@
 </script>
 
 <style scoped lang="scss">
+  // @import '@/assets/style/_colors.scss';
+
   .c-container {
     max-width: 600px;
     margin: 50px auto;
     box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.1);
     border-radius: 5px;
-    background-color: white;
+    background-color: $color-white;
     overflow: hidden;
   }
 

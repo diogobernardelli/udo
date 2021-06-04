@@ -6,6 +6,12 @@ Rails.application.routes.draw do
           post :reorder
         end
       end
+
+      resources :settings, only: [] do
+        collection do
+          post :toogle_alert
+        end
+      end
     end
   end
 

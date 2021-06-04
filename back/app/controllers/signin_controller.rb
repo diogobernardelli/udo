@@ -15,7 +15,8 @@ class SigninController < ApplicationController
                         secure: Rails.env.production?)
       render json: { 
         username: params[:username],
-        csrf: tokens[:csrf]
+        csrf: tokens[:csrf],
+        alerts: user.setting.alerts
       }
     else
       render_unauthorized_error

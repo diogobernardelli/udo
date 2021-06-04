@@ -1,4 +1,4 @@
-<img src="https://i.ibb.co/2PQ4xCC/logo.png" style="height: 80px;" />
+<img src="https://i.ibb.co/HVm3Fqg/logo.png" style="height: 80px;" />
 <br />
 
 *Create tasks for **You** to **do*** 

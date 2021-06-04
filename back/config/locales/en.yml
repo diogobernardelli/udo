@@ -36,6 +36,7 @@ en:
     items_updated: Activity Successfully Updated
     item_deleted: Activity Successfully Removed
     items_reordered: Your tasks have been reordered
+    settings_updated: Notifications Turned %{status}
   api_errors:
     already_exists: User already exists
     render_not_found: "%{class} Not found"

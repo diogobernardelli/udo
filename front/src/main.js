@@ -13,7 +13,8 @@ import {
   faTimes,
   faExclamationTriangle,
   faArrowCircleDown,
-  faCircleNotch
+  faCircleNotch,
+  faSave
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -24,7 +25,8 @@ library.add(
   faTimes,
   faExclamationTriangle,
   faArrowCircleDown,
-  faCircleNotch
+  faCircleNotch,
+  faSave
 )
 
 Vue.mixin(pageTitle)

@@ -6,21 +6,29 @@
         class="logo"
       />
       <div class="account">
-        <span>Hi, {{ username }}</span><br />
+        <span>Hi, <strong>{{ username }}</strong>.</span>
         <a
           class="logout"
-          href="javascript:;"
-          icon="sign-out-alt"
           @click.prevent="signOut"
         >
           Log Out
         </a>
+        <br />
+        Notifications <vToogle
+          @change="toogleNotificationState"
+          v-bind:checked="alertState"
+        />
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import vToogle from '@/components/header/toogle.vue'
+import { displaySuccessAlert, displayErrorAlert} from '@/tools/display-alert-message'
+
+const SETTINGS_ENDPOINT = '/api/v1/settings'
+
 export default {
   name: 'Header',
   created () {
@@ -31,6 +39,14 @@ export default {
 			username: localStorage.username
 		}
   },
+  components: {
+    vToogle,
+  },
+  computed: {
+    alertState() {
+      return localStorage.alerts == 'true'
+    }
+  },
   methods: {
     setError (error, text) {
       this.error = (error.response && error.response.data && error.response.data.error) || text
@@ -40,9 +56,21 @@ export default {
         .then(() => {
           delete localStorage.csrf
           delete localStorage.signedIn
+          delete localStorage.alerts
           this.$router.replace('/')
         })
-        .catch(() => this.$store.commit('displayAlert', {message: 'Cannot sign out', status: 'error'}))
+        .catch(() => displayErrorAlert('Cannot sign out'))
+    },
+    toogleNotificationState() {
+      this.$http.secured.post(`${SETTINGS_ENDPOINT}/toogle_alert`)
+        .then(response => {
+          localStorage.alerts = response.data.item.alerts
+          displaySuccessAlert(response.data.message)
+        })
+        .catch(error => {
+          const errorMessage = (error.response && error.response.data && error.response.data.error) || error
+          displayErrorAlert(errorMessage)
+        })
     },
     checkedSignedIn () {
       if (!localStorage.signedIn) {
@@ -69,7 +97,9 @@ export default {
       float: right;
 
       .logout {
+        display: inline-block;
         cursor: pointer;
+        margin: 0 0 5px 3px;
       }
     }
 	}

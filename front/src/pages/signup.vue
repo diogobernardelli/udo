@@ -19,7 +19,7 @@
 <script>
 import vLogo from '@/components/logo.vue'
 import vForm from '@/components/signup/form.vue'
-import vAlertMessage from '@/components/list/alert-message.vue'
+import vAlertMessage from '@/components/alert-message.vue'
 
 export default {
   name: 'Signup',

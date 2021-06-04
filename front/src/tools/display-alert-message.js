@@ -4,6 +4,8 @@ const SUCCESS_ALERT = 'success'
 const ERROR_ALERT = 'error'
 
 export function displaySuccessAlert(message) {
+	if (localStorage.signedIn && localStorage.alerts == 'false') return
+	
 	store.commit(
 		'displayAlert',
 		{
@@ -14,6 +16,8 @@ export function displaySuccessAlert(message) {
 }
 
 export function displayErrorAlert(message) {
+	if (localStorage.signedIn && localStorage.alerts == 'false') return
+
 	store.commit(
 		'displayAlert',
 		{

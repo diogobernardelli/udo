@@ -69,3 +69,10 @@
 		}
 	}
 }
+
+.c-hidden-box:disabled + .check-label {
+	.check-label-box {
+		cursor: default;
+		opacity: .4;
+	}
+}

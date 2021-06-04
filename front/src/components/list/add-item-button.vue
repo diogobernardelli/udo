@@ -19,23 +19,33 @@
 		>
 
 		<button
+			v-if="!isAddingItem"
 			type="submit"
 			class="-submit-input"
 			v-on:click="addNewItem"
 		>
 			<font-awesome-icon icon="arrow-circle-down" />
 		</button>
+
+		<font-awesome-icon v-else class="-adding-item-loader rotate" icon="circle-notch" />
 	</form>
 </template>
 
 <script>
 	import { mixin as clickaway } from 'vue-clickaway';
+	import { displayErrorAlert} from '@/tools/display-alert-message'
 
   export default {
 		name: 'AddItemButton',
 		mixins: [
 			clickaway
 		],
+		props: {
+			isAddingItem: {
+				type: Boolean,
+				default: false
+			}
+		},
 		data() {
 			return {
 				isWriteable: false,
@@ -49,7 +59,7 @@
 					this.$emit('addItem', this.activity)
 					this.activity = ''
 				} else {
-					this.$store.commit('displayAlert', {message: 'Activity cannot be empty', status: 'error'});
+					displayErrorAlert('Activity cannot be empty')
 				}
 			},
 			handleFocus(status) {
@@ -98,7 +108,8 @@
 			}
 		}
 
-		.-submit-input {
+		.-submit-input,
+		.-adding-item-loader {
 			position: absolute;
 			opacity: 0;
 			z-index: -1;
@@ -130,6 +141,13 @@
 
 			.-submit-input {
 				animation: displayButton 500ms ease-in-out forwards;
+			}
+
+			.-adding-item-loader {
+				opacity: 1;
+				z-index: 100;
+				top: 1px;
+				margin-left: -15px;
 			}
 		}
 	}

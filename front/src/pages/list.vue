@@ -9,6 +9,7 @@
     
     <vAddItemButton
       @addItem="addItem"
+      :is-adding-item="isAddingItem"
     />
 
     <font-awesome-icon v-if="isFetchingItems" class="rotate" icon="circle-notch" />
@@ -31,6 +32,7 @@
             v-bind:title="element.title"
             v-bind:order="element.order"
             v-bind:checked="element.completed"
+            v-bind:is-dragging="isDragging"
             @change="toggleCompleted"
             @edit="updateItem"
             @delete="removeItem"
@@ -40,24 +42,18 @@
         <vEmptyListHelper v-else />
       </div>
     </div>
-
-    <!-- <div class="list-group col-md-3">
-      <pre>{{listString}}</pre>
-    </div> -->
   </div>
 </template>
 
 <script>
 import draggable from "vuedraggable";
-import vHeader from '@/components/header.vue'
+import vHeader from '@/components/header/header.vue'
 import vEmptyListHelper from '@/components/list/empty-list-helper.vue'
 import vItem from '@/components/list/item.vue'
 import vAddItemButton from '@/components/list/add-item-button.vue'
-import vAlertMessage from '@/components/list/alert-message.vue'
+import vAlertMessage from '@/components/alert-message.vue'
 import { displaySuccessAlert, displayErrorAlert} from '@/tools/display-alert-message'
 
-const SUCCESS_ALERT = 'success'
-const ERROR_ALERT = 'error'
 const ITEMS_ENDPOINT = '/api/v1/items'
 
 export default {
@@ -75,13 +71,11 @@ export default {
   },
   data() {
     return {
-      // list: message.map((name, index) => {
-      //   return { id: index, name, order: index + 1, fixed: false, completed: !Math.round(Math.random()) };
-      // }),
       list: [],
       isDragging: false,
       delayedDragging: false,
-      isFetchingItems: false
+      isFetchingItems: false,
+      isAddingItem: false
     };
   },
   created() {
@@ -100,9 +94,6 @@ export default {
         group: "description",
         ghostClass: "ghost"
       };
-    },
-    listString() {
-      return JSON.stringify(this.list, null, 2);
     },
     containsItem() {
       return this.list.length > 0
@@ -128,21 +119,25 @@ export default {
           this.list = response.data.items
         })
         .catch(error => {
-          this.$store.commit(
-            'displayAlert',
-            {
-              message: error,
-              status: ERROR_ALERT
-            }
-          )
+          const errorMessage = (error.response && error.response.data && error.response.data.error) || error
+          displayErrorAlert(errorMessage)
         })
         .finally(() => this.isFetchingItems = false)
     },
-    toggleCompleted(id) {
-      let element = this.list.find(item => item.id === id)
-      element.completed = !element.completed
+    toggleCompleted(id, isChecked) {
+      this.$http.secured.patch(`${ITEMS_ENDPOINT}/${id}`, {
+        completed: isChecked
+      })
+        .then(response => {
+          displaySuccessAlert(response.data.message)
+        })
+        .catch(error => {
+          const errorMessage = (error.response && error.response.data && error.response.data.error) || error
+          displayErrorAlert(errorMessage)
+        })
     },
     addItem(text) {
+      this.isAddingItem = true
       this.updateOrderItems()
 
       this.$http.secured.post(ITEMS_ENDPOINT, {
@@ -158,16 +153,22 @@ export default {
           const errorMessage = (error.response && error.response.data && error.response.data.error) || error
           displayErrorAlert(errorMessage)
         })
+        .finally(() => setTimeout(() => this.isAddingItem = false, 500))
     },
-    updateItem(element) {
-      console.log(element)
-      this.$store.commit(
-        'displayAlert',
-        {
-          message: 'Activity Successfully Updated',
-          status: SUCCESS_ALERT
-        }
-      )
+    updateItem(id, title) {
+      this.$http.secured.patch(`${ITEMS_ENDPOINT}/${id}`, {
+        id: id,
+        title: title
+      })
+        .then(response => {
+          displaySuccessAlert(response.data.message)
+          const index = this.list.findIndex(item => item.id === id)
+          this.list[index].title = title
+        })
+        .catch(error => {
+          const errorMessage = (error.response && error.response.data && error.response.data.error) || error
+          displayErrorAlert(errorMessage)
+        })
     },
     removeItem(id) {
       this.$http.secured.delete(`${ITEMS_ENDPOINT}/${id}`)
@@ -187,7 +188,7 @@ export default {
         items: this.list
       })
         .then(response => {
-          // displaySuccessAlert(response.data.message)
+          displaySuccessAlert(response.data.message)
           this.list = response.data.items
         })
         .catch(error => {

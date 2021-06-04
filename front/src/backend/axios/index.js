@@ -35,6 +35,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
       .then(response => {
         localStorage.csrf = response.data.csrf
         localStorage.signedIn = true
+        localStorage.alerts = response.data.alerts
 
         let retryConfig = error.response.config
         retryConfig.headers['X-CSRF-TOKEN'] = localStorage.csrf
@@ -42,6 +43,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
       }).catch(error => {
         delete localStorage.csrf
         delete localStorage.signedIn
+        delete localStorage.alerts
 
         location.replace('/')
         return Promise.reject(error)

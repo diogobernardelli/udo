@@ -88,6 +88,7 @@
 				localStorage.username = response.data.username
 				localStorage.csrf = response.data.csrf
 				localStorage.signedIn = true
+				localStorage.alerts = response.data.alerts
 				this.$router.replace('/list')
 			},
 			signupFailed (error) {
@@ -95,7 +96,8 @@
 				const errorMessage = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
 				displayErrorAlert(errorMessage)
 				delete localStorage.csrf
-				delete localStorage.signedIn
+        delete localStorage.signedIn
+        delete localStorage.alerts
 			},
 			checkedSignedIn () {
 				if (localStorage.signedIn) {

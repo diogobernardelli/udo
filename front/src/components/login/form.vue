@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import { displayErrorAlert} from '@/tools/display-alert-message'
+  import { displayErrorAlert } from '@/tools/display-alert-message'
 
   export default {
     data () {
@@ -72,6 +72,7 @@
         }
         localStorage.username = response.data.username
         localStorage.csrf = response.data.csrf
+        localStorage.alerts = response.data.alerts
         localStorage.signedIn = true
         this.$router.replace('/list')
       },
@@ -79,8 +80,10 @@
         this.isLoading = false
         const errorMessage = (error.response && error.response.data && error.response.data.error) || error
         displayErrorAlert(errorMessage)
+        // this.$store.commit('displayAlert', {message: errorMessage, status: 'error'});
         delete localStorage.csrf
         delete localStorage.signedIn
+        delete localStorage.alerts
       },
       checkSignedIn () {
         if (localStorage.signedIn) {

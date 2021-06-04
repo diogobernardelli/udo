@@ -1,46 +1,75 @@
 <template>
   <li class="c-item">
-		<div class="l-content">
-			<div class="l-item-label">
-				<input
-					type="checkbox"
-					class="c-hidden-box"
-					v-bind:title="title"
-					v-bind:id="title"
-					v-on:change="$emit('change', id)"
-					v-model="isChecked"
-				/>
+		<form @submit.prevent>
+			<div class="l-content">
+				<div class="l-item-label">
+					<input
+						type="checkbox"
+						class="c-hidden-box"
+						v-bind:title="id"
+						v-bind:id="id"
+						v-on:change="$emit('change', id, isChecked)"
+						v-model="isChecked"
+						:disabled="isWritable"
+					/>
 
-				<label :for="title" class="check-label">
-					<span class="check-label-box"></span>
-					<span class="check-label-text">
-						{{title}}
-					</span>
-				</label>
+					<label :for="id" class="check-label">
+						<span class="check-label-box"></span>
+						<span v-if="!isWritable" class="check-label-text">
+							{{title}}
+						</span>
+
+						<input
+							v-else
+							type="text"
+							class="-text-input"
+							ref="itemInput"
+							placeholder="What will UDo?"
+							maxlength="50"
+							v-on-clickaway="away"
+							v-model="writableTitle"
+						>
+					</label>
+				</div>
+
+				<div class="l-action-buttons">
+					<div v-if="!isWritable">
+						<button
+							v-if="!isChecked"
+							class="o-icon-button"
+							v-on:click="enableWriteMode"
+						>
+							<font-awesome-icon icon="pencil-alt" />
+						</button>
+
+						<button
+							v-if="!isChecked"
+							class="o-icon-button"
+							v-on:click="$emit('delete', id)"
+						>
+							<font-awesome-icon icon="trash-alt" />
+						</button>
+					</div>
+
+					<div v-else>
+						<button
+							v-if="!isChecked"
+							type="submit"
+							class="o-icon-button"
+							v-on:click="updateItem"
+						>
+							<font-awesome-icon icon="save" />
+						</button>
+					</div>
+				</div>
 			</div>
-
-			<div class="l-action-buttons">
-				<button
-					v-if="!isChecked"
-					class="o-icon-button"
-					v-on:click="$emit('edit', id)"
-				>
-					<font-awesome-icon icon="pencil-alt" />
-				</button>
-
-				<button
-					v-if="!isChecked"
-					class="o-icon-button"
-					v-on:click="$emit('delete', id)"
-				>
-					<font-awesome-icon icon="trash-alt" />
-				</button>
-			</div>
-		</div>
+		</form>
 	</li>
 </template>
 
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
+
 export default {
 	name: "Item",
 	props: {
@@ -50,23 +79,66 @@ export default {
 		checked: {
 			type: Boolean,
 			default: false
+		},
+		isDragging: {
+			type: Boolean,
+			default: false
 		}
 	},
+	mixins: [
+		clickaway
+	],
 	data() {
 		return {
-			isChecked: this.checked
+			isChecked: this.checked,
+			isWritable: false,
+			writableTitle: this.title
 		}
 	},
 	watch: {
 		checked() {
 			this.isChecked = this.checked
-			if (this.isChecked) this.$store.commit('displayAlert', {message: 'Activity successfully completed', status: 'success'}); 
+			if (this.isChecked) this.isWritable = false
+		},
+		isWritable: {
+			handler() {
+				if (this.isWritable) {
+					this.$nextTick(() => {
+						this.focusInput();
+					});
+				}
+			},
+			immediate: true
+		},
+		title: {
+			handler() {
+				if (this.title) {
+					this.writableTitle = this.title
+				}
+			},
+			immediate: true
+		},
+		isDragging: {
+			handler() {
+				this.isWritable = false
+			},
+			immediate: true
 		}
 	},
 	methods: {
-		check(e) {
-			console.log(e)
-		}
+		enableWriteMode() {
+			this.isWritable = true
+		},
+		focusInput() {
+      this.$refs.itemInput.focus();
+    },
+		updateItem() {
+			this.$emit('edit', this.id, this.writableTitle)
+			this.isWritable = false
+		},
+		away: function() {
+			this.isWritable = false
+		},
 	}
 };
 </script>
@@ -143,6 +215,12 @@ export default {
 			&::after {
 				left: 0;
 			}
+		}
+
+		.-text-input {
+			border: 0;
+			padding: 0;
+			font-weight: bold;
 		}
 	}
 </style>

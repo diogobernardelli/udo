@@ -11,7 +11,7 @@
 
     <div class="c-sign-in-up">
       {{ $t('forms.action_sign_in') }}<br />
-			<router-link class="uppercase" to="/signup">{{ $t('forms.sign_in') }}</router-link>
+			<router-link class="uppercase" to="/">{{ $t('forms.sign_in') }}</router-link>
     </div>
   </div>
 </template>

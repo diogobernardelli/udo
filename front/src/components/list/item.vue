@@ -179,7 +179,11 @@
 			background: $color-accent;
 			color: $color-white;
 
-			.c-hidden-box:checked + .check-label {
+			.c-hidden-box + .check-label {
+				.check-label-box {
+					border-color: $color-white;
+				}
+
 				.check-label-text {
 					&:after {
 						background-color: $color-white;

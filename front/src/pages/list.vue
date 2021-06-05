@@ -86,6 +86,9 @@
     created() {
       this.load()
     },
+    beforeDestroy() {
+      this.$store.commit('closeAlert')
+    },
     computed: {
       getAlertMessage() {
         return {

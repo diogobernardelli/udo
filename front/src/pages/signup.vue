@@ -26,6 +26,9 @@
     pageTitle() {
       return this.$t('forms.sign_up')
     },
+    beforeDestroy() {
+      this.$store.commit('closeAlert')
+    },
     components: {
       vLogo,
       vForm,

@@ -52,7 +52,8 @@
 						this.alertText = this.text
 						this.hideTimeout = setTimeout(() => this.closeAlert(), CLOSE_TIMEOUT)
 					}
-				}
+				},
+				immediate: true
 			}
 		},
 		computed: {

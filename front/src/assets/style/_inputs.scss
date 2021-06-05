@@ -4,57 +4,53 @@
   padding: 15px 0 0;
   margin: 0 0 25px;
   width: 100%;
-}
 
-.-form-field {
-  font-family: inherit;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid $color-gray;
-  outline: 0;
-  font-size: $font-size-title;
-  color: $color-secondary;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ .form-label {
+  .-form-field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid $color-gray;
+    outline: 0;
     font-size: $font-size-title;
-    cursor: text;
-    top: 20px;
+    color: $color-secondary;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  
+    &::placeholder {
+      color: transparent;
+    }
+  
+    &:placeholder-shown ~ .form-label {
+      font-size: $font-size-title;
+      cursor: text;
+      top: 20px;
+    }
+  
+    &:focus {
+      ~ .form-label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: $font-size-small;
+        color: $color-accent;
+        font-weight:$weight-bold;    
+      }
+      
+      padding-bottom: 7px;  
+      font-weight: $weight-bold;
+      border-color: $color-accent;
+      border-image-slice: 1;
+    }
   }
-}
-
-.form-label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: $font-size-small;
-  color: $color-gray;
-}
-
-.-form-field:focus {
-  ~ .form-label {
+  
+  .form-label {
     position: absolute;
     top: 0;
     display: block;
     transition: 0.2s;
     font-size: $font-size-small;
-    color: $color-accent;
-    font-weight:$weight-bold;    
+    color: $color-gray;
   }
-  padding-bottom: 6px;  
-  font-weight: $weight-bold;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $color-accent,$color-secondary);
-  border-image-slice: 1;
-}
-
-.-form-field{
-  &:required,&:invalid { box-shadow:none; }
 }

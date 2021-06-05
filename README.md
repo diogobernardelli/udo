@@ -1,7 +1,9 @@
-<img src="https://i.ibb.co/mNZNqcD/logo.png" style="height: 80px;" />
+![UDo logo](https://i.ibb.co/mNZNqcD/logo.png)
 <br />
 
 *Create tasks for **You** to **do*** 
+
+![demo](https://i.ibb.co/WD2X0Rb/720c.gif)
 
 ## About the project
 

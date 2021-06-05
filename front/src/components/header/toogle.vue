@@ -10,25 +10,25 @@
 </template>
 
 <script>
-export default {
-	name: 'ToogleSwitch',
-	data() {
-		return {
-			isChecked: this.checked
-		}
-	},
-	props: {
-		checked: {
-			type: Boolean,
-			required: true
-		}
-	},
-	watch: {
-		checked() {
-			this.isChecked = this.checked
+	export default {
+		name: 'ToogleSwitch',
+		data() {
+			return {
+				isChecked: this.checked
+			}
+		},
+		props: {
+			checked: {
+				type: Boolean,
+				required: true
+			}
+		},
+		watch: {
+			checked() {
+				this.isChecked = this.checked
+			}
 		}
 	}
-}
 </script>
 
 <style scoped lang="scss">

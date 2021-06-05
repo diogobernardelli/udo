@@ -6,12 +6,7 @@
 
 <script>
   export default {
-    props: {
-      gutter: {
-        type: Boolean,
-        default: true
-      }
-    }
+    name: 'Container'
   }
 </script>
 

@@ -9,7 +9,7 @@
         <span v-html="$t('header.greetings', { user: username })"></span>
         <a
           class="logout"
-          @click.prevent="signOut"
+          @click.prevent="signUserOut"
         >
           {{ $t('header.sign_out') }}
         </a>
@@ -24,61 +24,50 @@
 </template>
 
 <script>
-import vToogle from '@/components/header/toogle.vue'
-import { displaySuccessAlert, displayErrorAlert} from '@/tools/display-alert-message'
+  import vToogle from '@/components/header/toogle.vue'
+  import { displaySuccessAlert } from '@/tools/display-alert-message'
+  import {
+    signOut,
+    checkSignedOut,
+    errorAlert
+  } from '@/tools/session'
 
-const SETTINGS_ENDPOINT = '/api/v1/settings'
+  const SETTINGS_ENDPOINT = '/api/v1/settings'
 
-export default {
-  name: 'Header',
-  created () {
-    this.checkedSignedIn()
-	},
-	data() {
-		return {
-			username: localStorage.username
-		}
-  },
-  components: {
-    vToogle,
-  },
-  computed: {
-    alertState() {
-      return localStorage.alerts == 'true'
-    }
-  },
-  methods: {
-    setError (error, text) {
-      this.error = (error.response && error.response.data && error.response.data.error) || text
+  export default {
+    name: 'Header',
+    created () {
+      checkSignedOut()
     },
-    signOut () {
-      this.$http.secured.delete('/signin')
-        .then(() => {
-          delete localStorage.csrf
-          delete localStorage.signedIn
-          delete localStorage.alerts
-          this.$router.replace('/')
-        })
-        .catch(() => displayErrorAlert(this.$t('errors.cannot_sign_out')))
+    data() {
+      return {
+        username: localStorage.username
+      }
     },
-    toogleNotificationState() {
-      this.$http.secured.post(`${SETTINGS_ENDPOINT}/toogle_alert`)
-        .then(response => {
-          localStorage.alerts = response.data.item.alerts
-          displaySuccessAlert(response.data.message)
-        })
-        .catch(error => {
-          const errorMessage = (error.response && error.response.data && error.response.data.error) || error
-          displayErrorAlert(errorMessage)
-        })
+    components: {
+      vToogle,
     },
-    checkedSignedIn () {
-      if (!localStorage.signedIn) {
-        this.$router.replace('/')
+    computed: {
+      alertState() {
+        return localStorage.alerts == 'true'
+      }
+    },
+    methods: {
+      signUserOut () {
+        signOut()
+      },
+      toogleNotificationState() {
+        this.$http.secured.post(`${SETTINGS_ENDPOINT}/toogle_alert`)
+          .then(response => {
+            localStorage.alerts = response.data.item.alerts
+            displaySuccessAlert(response.data.message)
+          })
+          .catch(error => {
+            errorAlert(error)
+          })
       }
     }
   }
-}
 </script>
 
 <style scoped lang="scss">

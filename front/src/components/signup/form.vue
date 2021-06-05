@@ -55,10 +55,14 @@
 </template>
 
 <script>
-  import { displayErrorAlert} from '@/tools/display-alert-message'
+  import {
+    signinSuccessful,
+    signinFailed,
+    checkSignedIn
+  } from '@/tools/session'
 
   export default {
-		data () {
+		data() {
 			return {
 				isLoading: false,
 				username: '',
@@ -66,43 +70,19 @@
 				password_confirmation: '',
 			}
 		},
-    created () {
-			this.checkedSignedIn()
+    created() {
+			checkSignedIn()
 		},
-		updated () {
-			this.checkedSignedIn()
+		updated() {
+			checkSignedIn()
 		},
     methods: {
-			signup () {
+			signup() {
 				this.isLoading = true
 				this.$http.plain.post('/signup', { username: this.username, password: this.password, password_confirmation: this.password_confirmation })
-					.then(response => this.signupSuccessful(response))
-					.catch(error => this.signupFailed(error))
-			},
-			signupSuccessful (response) {
-				if (!response.data.csrf) {
-					this.signupFailed(response)
-					return
-				}
-
-				localStorage.username = response.data.username
-				localStorage.csrf = response.data.csrf
-				localStorage.signedIn = true
-				localStorage.alerts = response.data.alerts
-				this.$router.replace('/list')
-			},
-			signupFailed (error) {
-				this.isLoading = false
-				const errorMessage = (error.response && error.response.data && error.response.data.error) || this.$t('errors.default')
-				displayErrorAlert(errorMessage)
-				delete localStorage.csrf
-        delete localStorage.signedIn
-        delete localStorage.alerts
-			},
-			checkedSignedIn () {
-				if (localStorage.signedIn) {
-					this.$router.replace('/list')
-				}
+					.then(response => signinSuccessful(response))
+          .catch(error => signinFailed(error))
+          .finally(() => this.isLoading = false)
 			}
 		}
   }

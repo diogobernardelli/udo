@@ -33,6 +33,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
   if (error.response && error.response.config && error.response.status === 401) {
     return plainAxiosInstance.post('/refresh', {}, { headers: { 'X-CSRF-TOKEN': localStorage.csrf } })
       .then(response => {
+        localStorage.username = response.data.username
         localStorage.csrf = response.data.csrf
         localStorage.signedIn = true
         localStorage.alerts = response.data.alerts
@@ -41,6 +42,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
         retryConfig.headers['X-CSRF-TOKEN'] = localStorage.csrf
         return plainAxiosInstance.request(retryConfig)
       }).catch(error => {
+        delete localStorage.username
         delete localStorage.csrf
         delete localStorage.signedIn
         delete localStorage.alerts

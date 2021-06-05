@@ -15,7 +15,7 @@
 			class="-text-input"
 			:placeholder="$t('list.add_item_button')"
 			maxlength="50"
-			v-model="activity"
+			v-model="item"
 			v-on:click="handleFocus(true)"
 		>
 
@@ -50,21 +50,21 @@
 		data() {
 			return {
 				isWriteable: false,
-				activity: ''
+				item: ''
 			}
 		},
 		methods: {
 			addNewItem() {
-				const value = this.activity
+				const value = this.item
 				if (value) {
-					this.$emit('addItem', this.activity)
-					this.activity = ''
+					this.$emit('addItem', this.item)
+					this.item = ''
 				} else {
 					displayErrorAlert(this.$t('errors.blank_item'))
 				}
 			},
 			handleFocus(status) {
-				this.activity = ''
+				this.item = ''
 				this.isWriteable = status
 			},
 			away: function() {

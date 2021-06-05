@@ -4,9 +4,10 @@ import router from './router'
 import store from './store'
 import VueAxios from 'vue-axios'
 import i18n from "./locales/i18n.js"
-import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 import pageTitle from '@/tools/page-title'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 import {
   faTrashAlt,
   faPencilAlt,
@@ -17,7 +18,6 @@ import {
   faCircleNotch,
   faSave
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
   faTrashAlt,

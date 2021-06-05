@@ -40,54 +40,33 @@
 </template>
 
 <script>
-  import { displayErrorAlert } from '@/tools/display-alert-message'
+  import {
+    signinSuccessful,
+    signinFailed,
+    checkSignedIn
+  } from '@/tools/session'
 
   export default {
-    data () {
+    data() {
       return {
         isLoading: false,
         username: '',
         password: ''
       }
     },
-    created () {
-      this.checkSignedIn()
+    created() {
+      checkSignedIn()
     },
-    updated () {
-      this.checkSignedIn()
+    updated() {
+      checkSignedIn()
     },
     methods: {
-      signin () {
+      signin() {
         this.isLoading = true  
         this.$http.plain.post('/signin', { username: this.username, password: this.password })
-          .then(response => {
-            return this.signinSuccessful(response)
-          })
-          .catch(error => this.signinFailed(error))
-      },
-      signinSuccessful (response) {
-        if (!response.data.csrf) {
-          this.signinFailed(response)
-          return
-        }
-        localStorage.username = response.data.username
-        localStorage.csrf = response.data.csrf
-        localStorage.alerts = response.data.alerts
-        localStorage.signedIn = true
-        this.$router.replace('/list')
-      },
-      signinFailed (error) {
-        this.isLoading = false
-        const errorMessage = (error.response && error.response.data && error.response.data.error) || error
-        displayErrorAlert(errorMessage)
-        delete localStorage.csrf
-        delete localStorage.signedIn
-        delete localStorage.alerts
-      },
-      checkSignedIn () {
-        if (localStorage.signedIn) {
-          this.$router.replace('/list')
-        }
+          .then(response =>  signinSuccessful(response))
+          .catch(error => signinFailed(error))
+          .finally(() => this.isLoading = false)
       }
     }
   }

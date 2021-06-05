@@ -17,29 +17,29 @@
 </template>
 
 <script>
-import vLogo from '@/components/logo.vue'
-import vForm from '@/components/login/form.vue'
-import vAlertMessage from '@/components/alert-message.vue'
+  import vLogo from '@/components/logo.vue'
+  import vForm from '@/components/login/form.vue'
+  import vAlertMessage from '@/components/alert-message.vue'
 
-export default {
-  name: 'Login',
-  pageTitle() {
-    return this.$t('forms.sign_in')
-  },
-  components: {
-    vLogo,
-    vForm,
-    vAlertMessage
-  },
-  computed: {
-    getAlertMessage() {
-      return {
-        message: this.$store.state.alertText,
-        status: this.$store.state.alertType
+  export default {
+    name: 'Login',
+    pageTitle() {
+      return this.$t('forms.sign_in')
+    },
+    components: {
+      vLogo,
+      vForm,
+      vAlertMessage
+    },
+    computed: {
+      getAlertMessage() {
+        return {
+          message: this.$store.state.alertText,
+          status: this.$store.state.alertType
+        }
       }
     }
   }
-}
 </script>
 
 <style scoped lang="scss">

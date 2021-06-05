@@ -73,85 +73,94 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
+	import { mixin as clickaway } from 'vue-clickaway';
 
-export default {
-	name: "Item",
-	props: {
-		title: String,
-		order: Number,
-		id: Number,
-		checked: {
-			type: Boolean,
-			default: false
-		},
-		isDragging: {
-			type: Boolean,
-			default: false
-		}
-	},
-	mixins: [
-		clickaway
-	],
-	data() {
-		return {
-			isChecked: this.checked,
-			isWritable: false,
-			writableTitle: this.title
-		}
-	},
-	watch: {
-		checked() {
-			this.isChecked = this.checked
-			if (this.isChecked) {
-				this.disableWriteMode()
+	export default {
+		name: "Item",
+		props: {
+			title: {
+				type: String,
+				default: ''
+			},
+			order: {
+				type: Number,
+				required: true
+			},
+			id: {
+				type: Number,
+				required: true
+			},
+			checked: {
+				type: Boolean,
+				default: false
+			},
+			isDragging: {
+				type: Boolean,
+				default: false
 			}
 		},
-		isWritable: {
-			handler() {
-				if (this.isWritable) {
-					this.$nextTick(() => {
-						this.focusInput();
-					});
+		mixins: [
+			clickaway
+		],
+		data() {
+			return {
+				isWritable: false,
+				isChecked: this.checked,
+				writableTitle: this.title
+			}
+		},
+		watch: {
+			checked() {
+				this.isChecked = this.checked
+				if (this.isChecked) {
+					this.disableWriteMode()
 				}
 			},
-			immediate: true
-		},
-		title: {
-			handler() {
-				if (this.title) {
-					this.writableTitle = this.title
-				}
+			isWritable: {
+				handler() {
+					if (this.isWritable) {
+						this.$nextTick(() => {
+							this.focusInput();
+						});
+					}
+				},
+				immediate: true
 			},
-			immediate: true
+			title: {
+				handler() {
+					if (this.title) {
+						this.writableTitle = this.title
+					}
+				},
+				immediate: true
+			},
+			isDragging: {
+				handler() {
+					this.disableWriteMode()
+				},
+				immediate: true
+			}
 		},
-		isDragging: {
-			handler() {
+		methods: {
+			enableWriteMode() {
+				this.isWritable = true
+			},
+			focusInput() {
+				this.$refs.itemInput.focus();
+			},
+			updateItem() {
+				this.$emit('edit', this.id, this.writableTitle)
 				this.disableWriteMode()
 			},
-			immediate: true
-		}
-	},
-	methods: {
-		enableWriteMode() {
-			this.isWritable = true
-		},
-		focusInput() {
-      this.$refs.itemInput.focus();
-    },
-		updateItem() {
-			this.$emit('edit', this.id, this.writableTitle)
-			this.disableWriteMode()
-		},
-		away: function() {
-			this.disableWriteMode()
-		},
-		disableWriteMode() {
-			this.isWritable = false
-			this.writableTitle = this.title
+			away: function() {
+				this.disableWriteMode()
+			},
+			disableWriteMode() {
+				this.isWritable = false
+				this.writableTitle = this.title
+			}
 		}
 	}
-};
 </script>
 
 <style scoped lang="scss">
@@ -219,6 +228,7 @@ export default {
 		.-text-input {
 			border: 0;
 			padding: 0;
+			width: 100%;
 			font-weight: $weight-bold;
 		}
 	}

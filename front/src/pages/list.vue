@@ -189,7 +189,10 @@
         })
           .then(response => {
             displaySuccessAlert(response.data.message)
-            this.list = response.data.items
+            this.list = []
+            this.$nextTick(() => {
+              this.list = response.data.items
+            });
           })
           .catch(error => {
             errorAlert(error)
